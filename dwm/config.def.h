@@ -90,10 +90,10 @@ static const char *appfinder[]  = { "xfce4-appfinder", NULL };
 static const char *upvol[]   = { "amixer", "sset", "Master",    "5+",     NULL };
 static const char *downvol[] = { "amixer", "sset", "Master",    "5-",     NULL };
 static const char *mutevol[] = { "amixer", "-D",   "pulse",     "set",    "Master", "+1", "toggle", NULL };
-static const char *playpause[] = { "for", "player", "in", "vlc", "spotify;", "do", "dbus-send", "--print-reply", "--dest=org.mpris.MediaPlayer2.$player", "/org/mpris/MediaPlayer2", "org.mpris.MediaPlayer2.Player.PlayPause;", "done", NULL };
-static const char *stop[] = { "for", "player", "in", "vlc", "spotify;", "do", "dbus-send", "--print-reply", "--dest=org.mpris.MediaPlayer2.$player", "/org/mpris/MediaPlayer2", "org.mpris.MediaPlayer2.Player.Stop;", "done", NULL };
-static const char *next[] = { "for", "player", "in", "vlc", "spotify;", "do", "dbus-send", "--print-reply", "--dest=org.mpris.MediaPlayer2.$player", "/org/mpris/MediaPlayer2", "org.mpris.MediaPlayer2.Player.Next;", "done", NULL };
-static const char *prev[] = { "for", "player", "in", "vlc", "spotify;", "do", "dbus-send", "--print-reply", "--dest=org.mpris.MediaPlayer2.$player", "/org/mpris/MediaPlayer2", "org.mpris.MediaPlayer2.Player.Previous;", "done", NULL };
+static const char *playpause[] = { "playerctl", "play-pause", NULL };
+static const char *stop[] = { "playerctl", "stop", NULL };
+static const char *next[] = { "playerctl", "next", NULL };
+static const char *prev[] = { "playerctl", "previous", NULL };
 
 
 static Key keys[] = {
