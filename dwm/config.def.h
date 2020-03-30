@@ -1,6 +1,6 @@
 /* See LICENSE file for copyright and license details. */
 #include "keepfloatingposition.c"
-
+#include "selfrestart.c"
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 20;       /* snap pixel */
@@ -132,7 +132,7 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
-
+	{ MODKEY|ShiftMask,             XK_r,      self_restart,   {0} },
         { 0,/*audio: up*/          	XF86AudioRaiseVolume,	spawn,	{.v = upvol   } },
         { 0,/*audio: down*/        	XF86AudioLowerVolume,	spawn,  {.v = downvol } },
         { 0,/*audio: mute Toggle*/ 	XF86AudioMute,       	spawn,  {.v = mutevol } },
