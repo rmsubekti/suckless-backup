@@ -1,10 +1,11 @@
 /* See LICENSE file for copyright and license details. */
 
 /* interval between updates (in ms) */
-const unsigned int interval = 1000;
+const unsigned int interval = 1400;
 
 /* text to show if no value can be retrieved */
 static const char unknown_str[] = "n/a";
+
 
 /* maximum output string length */
 #define MAXLEN 2048
@@ -62,6 +63,10 @@ static const char unknown_str[] = "n/a";
  * wifi_essid          WiFi ESSID                      interface name (wlan0)
  */
 static const struct arg args[] = {
-	/* function format          argument */
-	{ datetime, "%s",           "%b %e %R" },
+	/* function 	format          	argument */
+	{ netspeed_rx, 	" ⇣⇣ %s |",          	"wlp2s0" },
+	{ netspeed_tx, 	" ⇡⇡ %s |",          	"wlp2s0" },
+	{ cpu_perc, 	" CPU: %s% |",          "" },
+	{ ram_perc, 	" RAM: %s% |",          "" },
+	{ datetime, 	" %s",           	"%b %e %R" },
 };
