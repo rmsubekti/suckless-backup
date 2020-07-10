@@ -10,17 +10,27 @@ static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display 
 static const int showsystray        = 1;     /* 0 means no systray */
 static const int showbar            = 0;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "monospace:size=10" };
-static const char dmenufont[]       = "monospace:size=10";
+static const char *fonts[]          = { "Fantasque Sans Mono:size=8" };
+static const char dmenufont[]       = "Fantasque Sans Mono:size=8";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
-static const char col_cyan[]        = "#005577";
+static const char col_brown[]       = "#523333";
+static const char col_red[]         = "#fa1616";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
+	[SchemeSel]  = { col_gray4, col_brown,  col_red  },
+};
+
+/* Autostart*/
+
+static const char *const autostart[] = {
+	"slstatus", NULL,
+	"nm-applet", NULL,
+	"update-notifier", NULL,
+	NULL /* terminate */
 };
 
 /* tagging */
@@ -34,6 +44,8 @@ static const Rule rules[] = {
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
 	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	{ "Firefox",  "Toolkit",  NULL,	      0,	    1,           0 },
+        { "com-spss-java_client-core-common-Driver",  NULL,       NULL,       0,       1,            0 },
 };
 
 /* layout(s) */
@@ -43,9 +55,9 @@ static const int resizehints = 1;    /* 1 means respect size hints in tiled resi
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "[]=",      tile },    /* first entry is default */
-	{ "><>",      NULL },    /* no layout function means floating behavior */
-	{ "[M]",      monocle },
+	{ "T",      tile },    /* first entry is default */
+	{ "F",      NULL },    /* no layout function means floating behavior */
+	{ "M",      monocle },
 };
 
 /* key definitions */
@@ -77,7 +89,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_brown, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
 
 /* My Commands */
@@ -86,6 +98,7 @@ static const char *mail[]  = { "thunderbird", NULL };
 static const char *browser[]  = { "firefox", NULL };
 static const char *xran[]  = { "arandr", NULL };
 static const char *appfinder[]  = { "xfce4-appfinder", NULL };
+static const char *cam[]  = { "ffplay", "/dev/video0", NULL };
 
 /*audio controls*/
 static const char *upvol[]   = { "amixer", "sset", "Master",    "5+",     NULL };
@@ -146,6 +159,7 @@ static Key keys[] = {
 	{ 0,/*stop*/ 	   		XF86AudioStop,		spawn,  {.v = stop } },
 	{ 0,/*next*/ 	   		XF86AudioNext,		spawn,  {.v = next } },
 	{ 0,/*previous*/ 	   	XF86AudioPrev	,	spawn,  {.v = prev } },
+	{ Mod4Mask,/*cam display*/ 	XF86AudioStop	,	spawn,  {.v = cam } },
 };
 
 /* button definitions */
