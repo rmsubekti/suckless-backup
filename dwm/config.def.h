@@ -45,7 +45,7 @@ static const Rule rules[] = {
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
 	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
 	{ "Firefox",  "Toolkit",  NULL,	      0,	    1,           0 },
-        { "com-spss-java_client-core-common-Driver",  NULL,       NULL,       0,       1,            0 },
+    { "com-spss-java_client-core-common-Driver",  NULL,       NULL,       0,       1,            0 },
 };
 
 /* layout(s) */
@@ -73,12 +73,12 @@ static const Layout layouts[] = {
 #define XF86AudioMute           0x1008ff12
 #define XF86AudioRaiseVolume	0x1008ff13
 #define XF86AudioPlay           0x1008ff14
-#define XF86AudioStop    	0x1008ff15
-#define XF86AudioPrev    	0x1008ff16
+#define XF86AudioStop    		0x1008ff15
+#define XF86AudioPrev    		0x1008ff16
 #define XF86AudioNext           0x1008ff17
 #define XF86HomePage	        0x1008ff18
-#define XF86Mail		0x1008ff19
-#define XF86Tools	        0x1008ff81
+#define XF86Mail				0x1008ff19
+#define XF86Tools	        	0x1008ff81
 #define XF86Calculator          0x1008ff1d
 #define XF86Explorer            0x1008ff5d
 
@@ -101,8 +101,8 @@ static const char *appfinder[]  = { "xfce4-appfinder", NULL };
 static const char *cam[]  = { "ffplay", "/dev/video0", NULL };
 
 /*audio controls*/
-static const char *upvol[]   = { "amixer", "sset", "Master",    "5+",     NULL };
-static const char *downvol[] = { "amixer", "sset", "Master",    "5-",     NULL };
+static const char *upvol[]   = { "amixer", "sset", "Master",    "5%+",     NULL };
+static const char *downvol[] = { "amixer", "sset", "Master",    "5%-",     NULL };
 static const char *mutevol[] = { "amixer", "-D",   "pulse",     "set",    "Master", "+1", "toggle", NULL };
 static const char *playpause[] = { "playerctl", "play-pause", NULL };
 static const char *stop[] = { "playerctl", "stop", NULL };
@@ -151,15 +151,15 @@ static Key keys[] = {
         { 0,/*audio: mute Toggle*/ 	XF86AudioMute,       	spawn,  {.v = mutevol } },
 
 	{ Mod4Mask,/*screen setting*/	XF86Explorer,		spawn,  {.v = xran   } },
-	{ 0,/*open file manager*/  	XF86Explorer,		spawn,  {.v = fm   } },
-	{ 0,/*open mail app*/      	XF86Mail,		spawn,  {.v = mail } },
-	{ 0,/*launch browser*/ 	   	XF86HomePage,		spawn,  {.v = browser } },
-	{ 0,/*launch browser*/ 	   	XF86Calculator,		spawn,  {.v = appfinder } },
-	{ 0,/*play pause*/ 	   	XF86AudioPlay,		spawn,  {.v = playpause } },
-	{ 0,/*stop*/ 	   		XF86AudioStop,		spawn,  {.v = stop } },
-	{ 0,/*next*/ 	   		XF86AudioNext,		spawn,  {.v = next } },
-	{ 0,/*previous*/ 	   	XF86AudioPrev	,	spawn,  {.v = prev } },
-	{ Mod4Mask,/*cam display*/ 	XF86AudioStop	,	spawn,  {.v = cam } },
+	{ 0,/*open file manager*/  		XF86Explorer,		spawn,  {.v = fm   } },
+	{ 0,/*open mail app*/      		XF86Mail,			spawn,  {.v = mail } },
+	{ 0,/*launch browser*/ 	   		XF86HomePage,		spawn,  {.v = browser } },
+	{ 0,/*launch browser*/ 	   		XF86Calculator,		spawn,  {.v = appfinder } },
+	{ 0,/*play pause*/ 	   			XF86AudioPlay,		spawn,  {.v = playpause } },
+	{ 0,/*stop*/ 	   				XF86AudioStop,		spawn,  {.v = stop } },
+	{ 0,/*next*/ 	   				XF86AudioNext,		spawn,  {.v = next } },
+	{ 0,/*previous*/ 	   			XF86AudioPrev,		spawn,  {.v = prev } },
+	{ Mod4Mask,/*cam display*/ 		XF86AudioStop,		spawn,  {.v = cam } },
 };
 
 /* button definitions */
