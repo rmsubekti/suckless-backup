@@ -29,12 +29,11 @@ static const char *colors[][3]      = {
 static const char *const autostart[] = {
 	"slstatus", NULL,
 	"nm-applet", NULL,
-	"update-notifier", NULL,
 	NULL /* terminate */
 };
 
 /* tagging */
-static const char *tags[] = { "⓵", "⓶", "⓷", "⓸", "⓹", "⓺", "⓻", "⓼", "⓽" };
+static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -43,13 +42,11 @@ static const Rule rules[] = {
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
-	{ "Firefox",  "Toolkit",  NULL,	      0,	    1,           0 },
-    { "com-spss-java_client-core-common-Driver",  NULL,       NULL,       0,       1,            0 },
+	{ "Firefox",  "Firefox",       NULL,       1 << 8,       0,           -1 },
 };
 
 /* layout(s) */
-static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
+static const float mfact     = 0.60; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
 
@@ -73,12 +70,12 @@ static const Layout layouts[] = {
 #define XF86AudioMute           0x1008ff12
 #define XF86AudioRaiseVolume	0x1008ff13
 #define XF86AudioPlay           0x1008ff14
-#define XF86AudioStop    		0x1008ff15
-#define XF86AudioPrev    		0x1008ff16
+#define XF86AudioStop    	0x1008ff15
+#define XF86AudioPrev    	0x1008ff16
 #define XF86AudioNext           0x1008ff17
 #define XF86HomePage	        0x1008ff18
-#define XF86Mail				0x1008ff19
-#define XF86Tools	        	0x1008ff81
+#define XF86Mail		0x1008ff19
+#define XF86Tools	        0x1008ff81
 #define XF86Calculator          0x1008ff1d
 #define XF86Explorer            0x1008ff5d
 
@@ -94,8 +91,11 @@ static const char *termcmd[]  = { "st", NULL };
 
 /* My Commands */
 static const char *fm[]  = { "thunar", NULL };
+static const char *calc[]  = { "galculator", NULL };
+static const char *vlc[]  = { "vlc", NULL };
 static const char *mail[]  = { "thunderbird", NULL };
-static const char *browser[]  = { "firefox", NULL };
+static const char *firefox[]  = { "firefox", NULL };
+static const char *surf[]  = { "surf", NULL };
 static const char *xran[]  = { "arandr", NULL };
 static const char *appfinder[]  = { "xfce4-appfinder", NULL };
 static const char *cam[]  = { "ffplay", "/dev/video0", NULL };
@@ -108,6 +108,10 @@ static const char *playpause[] = { "playerctl", "play-pause", NULL };
 static const char *stop[] = { "playerctl", "stop", NULL };
 static const char *next[] = { "playerctl", "next", NULL };
 static const char *prev[] = { "playerctl", "previous", NULL };
+
+/* backlight controls (xorg-xbacklight) */
+static const char *lightinc[]   = { "xbacklight", "-inc", "5",     NULL };
+static const char *lightdec[]   = { "xbacklight", "-dec", "5",     NULL };
 
 
 static Key keys[] = {
@@ -150,16 +154,26 @@ static Key keys[] = {
         { 0,/*audio: down*/        	XF86AudioLowerVolume,	spawn,  {.v = downvol } },
         { 0,/*audio: mute Toggle*/ 	XF86AudioMute,       	spawn,  {.v = mutevol } },
 
-	{ Mod4Mask,/*screen setting*/	XF86Explorer,		spawn,  {.v = xran   } },
+        { MODKEY,/*backlight: increase*/	XF86AudioRaiseVolume,	spawn,	{.v = lightinc   } },
+        { MODKEY,/*backlight: decrease*/	XF86AudioLowerVolume,	spawn,  {.v = lightdec } },
+
 	{ 0,/*open file manager*/  		XF86Explorer,		spawn,  {.v = fm   } },
-	{ 0,/*open mail app*/      		XF86Mail,			spawn,  {.v = mail } },
-	{ 0,/*launch browser*/ 	   		XF86HomePage,		spawn,  {.v = browser } },
-	{ 0,/*launch browser*/ 	   		XF86Calculator,		spawn,  {.v = appfinder } },
-	{ 0,/*play pause*/ 	   			XF86AudioPlay,		spawn,  {.v = playpause } },
-	{ 0,/*stop*/ 	   				XF86AudioStop,		spawn,  {.v = stop } },
-	{ 0,/*next*/ 	   				XF86AudioNext,		spawn,  {.v = next } },
-	{ 0,/*previous*/ 	   			XF86AudioPrev,		spawn,  {.v = prev } },
+	{ 0,/*open mail app*/      		XF86Mail,		spawn,  {.v = mail } },
+
+	{ 0,/*launch browser*/ 	   		XF86HomePage,		spawn,  {.v = surf } },
+	{ Mod4Mask,/*launch browser*/ 	   	XF86HomePage,		spawn,  {.v = firefox } },
+
+	{ 0,/* lauch calculator*/    		XF86Calculator,		spawn,  {.v = calc } },
+	{ 0,/* lauch vlc*/    			XF86Tools,		spawn,  {.v = vlc } },
+
+	{ 0,/*play pause*/ 	   		XF86AudioPlay,		spawn,  {.v = playpause } },
+	{ 0,/*stop*/ 	   			XF86AudioStop,		spawn,  {.v = stop } },
+	{ 0,/*next*/ 	   			XF86AudioNext,		spawn,  {.v = next } },
+	{ 0,/*previous*/ 	   		XF86AudioPrev,		spawn,  {.v = prev } },
+
+	{ Mod4Mask,/*screen setting*/		XF86Explorer,		spawn,  {.v = xran } },
 	{ Mod4Mask,/*cam display*/ 		XF86AudioStop,		spawn,  {.v = cam } },
+	{ Mod4Mask,/*appfinder*/ 		XK_p,			spawn,  {.v = appfinder } },
 };
 
 /* button definitions */
