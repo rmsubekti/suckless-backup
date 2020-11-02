@@ -28,6 +28,7 @@ static const char *colors[][3]      = {
 /* Autostart*/
 
 static const char *const autostart[] = {
+	"compton", NULL,
 	"slstatus", NULL,
 	"nm-applet", NULL,
 	NULL /* terminate */
@@ -100,6 +101,7 @@ static const char *surf[]  = { "surf", NULL };
 static const char *xran[]  = { "arandr", NULL };
 static const char *appfinder[]  = { "xfce4-appfinder", NULL };
 static const char *cam[]  = { "ffplay", "/dev/video0", NULL };
+static const char *code[]  = { "code-oss", NULL };
 
 /*audio controls*/
 static const char *upvol[]   = { "amixer", "sset", "Master",    "5%+",     NULL };
@@ -119,6 +121,7 @@ static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
+	{ Mod4Mask|ShiftMask,           XK_Return, spawn,          {.v = code } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
