@@ -3,14 +3,14 @@
 #include "selfrestart.c"
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
-static const unsigned int gappx     = 15;        /* gaps between windows */
+static const unsigned int gappx     = 0;        /* gaps between windows */
 static const unsigned int snap      = 20;       /* snap pixel */
 static const unsigned int systraypinning = 1;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
 static const unsigned int systrayspacing = 1;   /* systray spacing */
 static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
-static const int showsystray        = 1;     /* 0 means no systray */
-static const int showbar            = 0;        /* 0 means no bar */
-static const int topbar             = 1;        /* 0 means bottom bar */
+static const int showsystray        = 1;     	/* 0 means no systray */
+static const int showbar            = 1;        /* 0 means no bar */
+static const int topbar             = 0;        /* 0 means bottom bar */
 static const char *fonts[]          = { "Fantasque Sans Mono:size=8" };
 static const char dmenufont[]       = "Fantasque Sans Mono:size=8";
 static const char col_gray1[]       = "#222222";
@@ -80,6 +80,7 @@ static const Layout layouts[] = {
 #define XF86Tools	        0x1008ff81
 #define XF86Calculator          0x1008ff1d
 #define XF86Explorer            0x1008ff5d
+#define XF_Print            	0xff61
 
 
 
@@ -94,7 +95,7 @@ static const char *termcmd[]  = { "st", NULL };
 /* My Commands */
 static const char *fm[]  = { "thunar", NULL };
 static const char *calc[]  = { "galculator", NULL };
-static const char *vlc[]  = { "vlc", NULL };
+static const char *vlc[]  = { "vlc","Music","-d", NULL };
 static const char *mail[]  = { "thunderbird", NULL };
 static const char *firefox[]  = { "firefox", NULL };
 static const char *surf[]  = { "surf", NULL };
@@ -102,6 +103,7 @@ static const char *xran[]  = { "arandr", NULL };
 static const char *appfinder[]  = { "xfce4-appfinder", NULL };
 static const char *cam[]  = { "ffplay", "/dev/video0", NULL };
 static const char *code[]  = { "code-oss", NULL };
+static const char *screenshoot[]  = { "xfce-screenshooter", NULL };
 
 /*audio controls*/
 static const char *upvol[]   = { "amixer", "sset", "Master",    "5%+",     NULL };
@@ -181,6 +183,7 @@ static Key keys[] = {
 	{ Mod4Mask,/*screen setting*/		XF86Explorer,		spawn,  {.v = xran } },
 	{ Mod4Mask,/*cam display*/ 		XF86AudioStop,		spawn,  {.v = cam } },
 	{ Mod4Mask,/*appfinder*/ 		XK_p,			spawn,  {.v = appfinder } },
+	{ 0,/*screenshooter*/ 			XF_Print,		spawn,  {.v = screenshoot } },
 };
 
 /* button definitions */
