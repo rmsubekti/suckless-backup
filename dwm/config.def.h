@@ -3,14 +3,14 @@
 #include "selfrestart.c"
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
-static const unsigned int gappx     = 0;        /* gaps between windows */
+static const unsigned int gappx     = 11;        /* gaps between windows */
 static const unsigned int snap      = 20;       /* snap pixel */
 static const unsigned int systraypinning = 1;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
 static const unsigned int systrayspacing = 1;   /* systray spacing */
 static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
 static const int showsystray        = 1;     	/* 0 means no systray */
 static const int showbar            = 1;        /* 0 means no bar */
-static const int topbar             = 0;        /* 0 means bottom bar */
+static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "Fantasque Sans Mono:size=8" };
 static const char dmenufont[]       = "Fantasque Sans Mono:size=8";
 static const char col_gray1[]       = "#222222";
@@ -26,7 +26,6 @@ static const char *colors[][3]      = {
 };
 
 /* Autostart*/
-
 static const char *const autostart[] = {
 	"compton", NULL,
 	"slstatus", NULL,
@@ -48,7 +47,7 @@ static const Rule rules[] = {
 };
 
 /* layout(s) */
-static const float mfact     = 0.60; /* factor of master area size [0.05..0.95] */
+static const float mfact     = 0.65; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
 
@@ -82,8 +81,6 @@ static const Layout layouts[] = {
 #define XF86Explorer            0x1008ff5d
 #define XF_Print            	0xff61
 
-
-
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
@@ -98,12 +95,14 @@ static const char *calc[]  = { "galculator", NULL };
 static const char *vlc[]  = { "vlc","Music","-d", NULL };
 static const char *mail[]  = { "thunderbird", NULL };
 static const char *firefox[]  = { "firefox", NULL };
+static const char *chrome[]  = { "chromium", NULL };
 static const char *surf[]  = { "surf", NULL };
 static const char *xran[]  = { "arandr", NULL };
 static const char *appfinder[]  = { "xfce4-appfinder", NULL };
 static const char *cam[]  = { "ffplay", "/dev/video0", NULL };
 static const char *code[]  = { "code-oss", NULL };
 static const char *screenshoot[]  = { "xfce-screenshooter", NULL };
+static const char *downloader[]  = { "clipgrab", NULL };
 
 /*audio controls*/
 static const char *upvol[]   = { "amixer", "sset", "Master",    "5%+",     NULL };
@@ -117,7 +116,6 @@ static const char *prev[] = { "playerctl", "previous", NULL };
 /* backlight controls (xorg-xbacklight) */
 static const char *lightinc[]   = { "xbacklight", "-inc", "5",     NULL };
 static const char *lightdec[]   = { "xbacklight", "-dec", "5",     NULL };
-
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -169,8 +167,9 @@ static Key keys[] = {
 	{ 0,/*open file manager*/  		XF86Explorer,		spawn,  {.v = fm   } },
 	{ 0,/*open mail app*/      		XF86Mail,		spawn,  {.v = mail } },
 
-	{ 0,/*launch browser*/ 	   		XF86HomePage,		spawn,  {.v = surf } },
-	{ Mod4Mask,/*launch browser*/ 	   	XF86HomePage,		spawn,  {.v = firefox } },
+	{ 0,/*launch browser*/ 	   		XF86HomePage,		spawn,  {.v = firefox } },
+	{ Mod4Mask,/*launch browser*/ 	   	XF86HomePage,		spawn,  {.v = surf } },
+	{ MODKEY,/*launch browser*/ 	   	XF86HomePage,		spawn,  {.v = chrome } },
 
 	{ 0,/* lauch calculator*/    		XF86Calculator,		spawn,  {.v = calc } },
 	{ 0,/* lauch vlc*/    			XF86Tools,		spawn,  {.v = vlc } },
@@ -182,8 +181,9 @@ static Key keys[] = {
 
 	{ Mod4Mask,/*screen setting*/		XF86Explorer,		spawn,  {.v = xran } },
 	{ Mod4Mask,/*cam display*/ 		XF86AudioStop,		spawn,  {.v = cam } },
+	{ Mod4Mask,/*downloader*/ 	   	XF86AudioPlay,		spawn,  {.v = downloader } },
 	{ Mod4Mask,/*appfinder*/ 		XK_p,			spawn,  {.v = appfinder } },
-	{ 0,/*screenshooter*/ 			XF_Print,		spawn,  {.v = screenshoot } },
+	{ MODKEY,/*screenshooter*/ 			XF86Explorer,		spawn,  {.v = screenshoot } },
 };
 
 /* button definitions */
